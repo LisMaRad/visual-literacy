@@ -3,6 +3,17 @@
 @tailwind utilities;
 
 body {
-  margin: 0;
+  @apply h-[100vh] w-[100vw] bg-primary relative p-7;
 }
 
+p, h1, h2, div {
+  @apply text-white;
+}
+
+h1{
+  @apply text-h1 font-bold mb-4;
+}
+
+p {
+  @apply text-p leading-none font-light;
+}
