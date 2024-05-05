@@ -3,7 +3,8 @@
 @tailwind utilities;
 
 body {
-  @apply h-full w-full bg-primary p-6
+  @apply h-full w-full bg-primary p-6;
+  font-size: 2.5rem;
 }
 
 p, h1, h2, div {
