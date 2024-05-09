@@ -1,79 +1,97 @@
 import React, {useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {Button} from "../Components/Button";
-import {InputField} from "../Components/InputField";
 import {collection, getDocs} from "firebase/firestore";
 import {firestore, storage} from "../firebaseConfig";
 import {ref, getDownloadURL} from "firebase/storage";
 import {ImageInput} from "../Components/ImageInput";
 import {Hangman} from "../Components/Hangman";
 
-interface GuessingGameProps {
-
-}
-
-type AiPrompt = {
-    name: string,
-    key: number,
+interface AiPrompts {
+    imageUrls: string[],
     prompt: string,
-    pictureUrls: string[],
+    guessedPrompt?: string;
 }
 
-const GuessingGame: React.FC<GuessingGameProps> = () => {
-    const [data, setData] = React.useState<AiPrompt[]>([]);
-    const [pictures, setPictures] = React.useState<string[]>([]);
+const GuessingGame: React.FC = () => {
+    const [data, setData] = React.useState<AiPrompts[]>([]);
     const [index, setIndex] = React.useState<number>(0);
     const [hint, setHint] = React.useState<boolean>(false);
     const [inputGuesses, setInputGuesses] = React.useState<string[]>([]);
+    const [isLoading, setIsLoading] = React.useState<boolean>(true);
     const navigate = useNavigate();
-    const prompt = 'Globe and turtle'.toLowerCase();
-
-    console.log(index);
 
     useEffect(() => {
-
         const fetchData = async () => {
+            setIsLoading(true); // Set loading to true when fetching starts
+
             const querySnapshot = await getDocs(collection(firestore, 'pictures'));
             const documents = querySnapshot.docs.map((doc) => doc.data());
-            // @ts-ignore
-            setData(documents);
 
-            // Move the code here
-            // documents.forEach((element) => {
-            //     const imageUrl = ref(storage, element.name);
-            //     getDownloadURL(imageUrl)
-            //         .then((url) => {
-            //             // `url` is the download URL for 'images/my-image.jpg'
-            //             console.log(url);
-            //             setPictures((prevPictures) => [...prevPictures, url]);
-            //         })
-            //         .catch((error) => {
-            //             // Handle any errors
-            //             console.error(error);
-            //         });
-            // });
+            const aiPrompts: AiPrompts[] = [];
+
+            for (const doc of documents) {
+                const imageUrlArray: string[] = []; // Reset imageUrlArray for each document
+
+                for (const imageName of doc.imageUrls) {
+                    const imageUrl = ref(storage, imageName);
+                    try {
+                        const url = await getDownloadURL(imageUrl);
+                        imageUrlArray.push(url);
+                    } catch (error) {
+                        console.error("Error fetching image URL:", error);
+                    }
+                }
+
+                aiPrompts.push({
+                    imageUrls: imageUrlArray,
+                    prompt: doc.prompt.toLowerCase()
+                });
+            }
+
+            setData(aiPrompts);
+            setIsLoading(false); // Set loading to false when fetching ends
+
         };
 
-        fetchData().catch((error) => {
-            return <div>{error}</div>
-        });
-    }, []); // Add an empty array here
 
-    //TODO: add new guess to the list of guesses
+        fetchData().catch((error) => {
+            console.error("Error fetching data:", error);
+        });
+    }, []);
+
+
     const addGuess = (input: string) => {
         setInputGuesses([...inputGuesses, input]);
     };
-    console.log(data);
 
     return (
         <>
-            <div className="fixed top-4 right-4">
-                <Button onClick={() => navigate("/")}>Home</Button>
-            </div>
-            <h3 className="max-w-[60%] leading-none h-[180px]">What was the
-                AI Prompt?</h3>
-            {!hint ? <ImageInput nextPage={() => setIndex(index + 1)} setHangman={() => setHint(!hint)}/> :
-                <Hangman nextPage={() => {setIndex(index + 1); setHint(false)}} currentIndex={index} prompt={prompt}/>}
+            {isLoading ? (<div>Laden</div>) : ( // Render Loading component if isLoading is true
+                <>
+                    <div className="fixed top-4 right-4">
+                        <Button onClick={() => navigate("/")}>Home</Button>
+                    </div>
+                    <h3 className="max-w-[60%] leading-none h-[180px]">What was the AI Prompt?</h3>
+                    {data.length > 0 && index < 5 && (
+                        <>
+                            {!hint ? (
+                                <ImageInput nextPage={() => setIndex(index + 1)} setHangman={() => setHint(!hint)}
+                                            images={data[index]?.imageUrls} prompt={data[index]?.prompt} addGuess={addGuess}/>
+                            ) : (
+                                    <Hangman
+                                        nextPage={() => {
+                                            setIndex(index + 1);
+                                            setHint(false);
+                                        }}
+                                        currentIndex={index}
+                                        images={data[index]?.imageUrls}
+                                        prompt={data[index]?.prompt}
+                                    />
+                            )}
+                        </>
+                    )}
+                </>)}
         </>
     );
 }
