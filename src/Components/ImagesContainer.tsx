@@ -8,7 +8,7 @@ type ImagesContainerProps = {
 
 export function ImagesContainer({imageUrls}: ImagesContainerProps) {
    return (
-        <div className="flex flex-wrap w-3/4">
+        <div className="flex flex-wrap w-full">
             {imageUrls.map((image, index) => (
                 <div key={index} className="w-1/2 aspect-square">
                     <img src={image} alt="image" className="object-cover w-full h-full"/>

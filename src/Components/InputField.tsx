@@ -3,7 +3,7 @@ import React from 'react';
 type InputFieldProps = {
     name: string,
     value?: string,
-    answer: boolean,
+    answer?: boolean,
     placeholder?: string,
     onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void,
 };
@@ -15,6 +15,6 @@ export function InputField ({ name, value, answer, placeholder, onChange }: Inpu
                value={value}
                onChange={onChange}
                placeholder={placeholder}
-               className={`w-full border-2 rounded-[100px] bg-primary text-white py-2 px-8 mt-8 ${answer ? "border-green-500" : "border-white"}`} />
+               className={`w-full border-2 rounded-[100px] bg-primary text-white py-2 px-8 ${answer ? "border-green-500" : "border-white"}`} />
     );
 };
