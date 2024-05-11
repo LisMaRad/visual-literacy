@@ -44,7 +44,9 @@ export function Hangman({images, nextPage, prompt }: HangmanProps) {
     console.log("prompt", prompt);
     return (
         <div className="max-w-[816px] flex flex-col mx-auto items-center">
-            <ImagesContainer imageUrls={images}></ImagesContainer>
+            <div className="w-3/4">
+                <ImagesContainer imageUrls={images}></ImagesContainer>
+            </div>
             <div
                 className="text-white py-2 mt-7">
             <WordToGuess displayWord={generateDisplayWord()} />

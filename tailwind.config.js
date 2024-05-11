@@ -8,6 +8,7 @@ module.exports = {
       'primary': '#5D15FF',
       'white': '#FFFFFF',
       'black': '#000000',
+      'accent': '#FFBA00',
     },
     fontFamily: {
       sans: 'Helvetica, sans-serif',
@@ -17,7 +18,7 @@ module.exports = {
       'h2': '8rem',
       'h3': '5rem',
       'p': '3rem',
-      'button': '1.5rem',
+      'button': '2.5rem',
     },
     extend: {
       spacing: {

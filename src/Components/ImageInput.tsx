@@ -13,7 +13,6 @@ type ImageInputProps = {
 };
 
 export function ImageInput({prompt, images, nextPage, setHangman, addGuess}: ImageInputProps) {
-    const navigate = useNavigate();
     const [guess, setGuess] = useState("");
     const [answer, setAnswer] = useState<boolean>(false);
     const [answerSubmitted, setAnswerSubmitted] = useState<boolean>(false);
@@ -27,8 +26,10 @@ export function ImageInput({prompt, images, nextPage, setHangman, addGuess}: Ima
     };
 
     return (
-        <div className="max-w-[816px] flex flex-col mx-auto items-center">
-            <ImagesContainer imageUrls={images}></ImagesContainer>
+        <div className="max-w-[816px] flex flex-col gap-10 mx-auto items-center">
+            <div className="w-3/4">
+                <ImagesContainer imageUrls={images}></ImagesContainer>
+            </div>
             <InputField name="guess" onChange={(e) => {
                 setGuess(e.target.value);
                 setAnswer(false);
@@ -48,8 +49,8 @@ export function ImageInput({prompt, images, nextPage, setHangman, addGuess}: Ima
             </div>}
             {!answerSubmitted ? <div className="fixed bottom-4 left-4">
                 Guess the AI prompt that generated these four pictures</div> : answer ? (
-                <div className="fixed bottom-4 left-4">
-                    Your guess was correct!</div>) : <div className="fixed bottom-4 left-4">
+                <div className="fixed bottom-4 left-4 text-accent">
+                    Your guess was correct!</div>) : <div className="fixed bottom-4 left-4 text-accent">
                 Unfortunately your guess was wrong</div>}
         </div>
     );
