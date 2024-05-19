@@ -27,7 +27,7 @@ const GuessingGame: React.FC = () => {
         const fetchData = async () => {
             setIsLoading(true); // Set loading to true when fetching starts
 
-            const picturesQuery = query(collection(firestore, 'pictures'), limit(5));
+            const picturesQuery = query(collection(firestore, 'pictures'), limit(3));
             const querySnapshot = await getDocs(picturesQuery);
             const documents = querySnapshot.docs.map((doc) => doc.data());
 
@@ -80,7 +80,7 @@ const GuessingGame: React.FC = () => {
                     <div className="fixed top-4 right-4">
                         <Button onClick={() => navigate("/")}>Home</Button>
                     </div>
-                    {data.length > 0 && index < 5 && (
+                    {data.length > 0 && index < 3 && (
                         <>
                             <h3 className="max-w-[60%] leading-none h-[180px]">What was the AI Prompt?</h3>
                             {!hint ? (
@@ -104,7 +104,7 @@ const GuessingGame: React.FC = () => {
                             )}
                         </>
                     )}
-                    {index === 5 && (
+                    {index === 3 && (
                         <>
                             <h2 className="max-w-[80%] leading-[7rem] h-[300px]">What had these
                                 Examples in Common?</h2>
@@ -115,14 +115,14 @@ const GuessingGame: React.FC = () => {
                             </div>
                         </>
                     )}
-                    {index === 6 && (
+                    {index === 4 && (
                         <>
                             <h3 className="max-w-[60%] leading-none h-[300px]">What had these
                                 Examples in Common?</h3>
                             <div className="flex flex-col lg:flex-row items-start justify-start gap-12">
                                 {data.map((item, index) => (
                                     <>
-                                        <ImagesAndGuessesOverview item={item} guess={"Das hier ist ein Guess"}/>
+                                        <ImagesAndGuessesOverview item={item}/>
 
                                     </>
                                 ))}
@@ -133,7 +133,7 @@ const GuessingGame: React.FC = () => {
                                 <div>White indicates the real prompt that generated these images</div>
                                 </div>
                             <div className="fixed bottom-4 right-4 flex flex-col gap-3 lg:gap-7">
-                                <Button onClick={() => setIndex(5)}>Back</Button>
+                                <Button onClick={() => setIndex(4)}>Back</Button>
                                 <Button onClick={() => navigate("/biasinfo")}>Continue</Button>
                             </div>
                         </>
