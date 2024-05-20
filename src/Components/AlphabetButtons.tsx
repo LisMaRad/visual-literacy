@@ -21,7 +21,7 @@ const AlphabetButtons = ({ guessedLetters, onLetterClick }: AlphabetButtonsProps
                     key={letter}
                     onClick={() => handleClick && handleClick(letter)}
                     disabled={guessedLetters.includes(letter)}
-                    className ={`p-1 uppercase text-p mx-2 ${guessedLetters.includes(letter) && 'text-primary'}`}
+                    className ={`p-1 uppercase text-[1.5rem] lg:text-p mx-2 ${guessedLetters.includes(letter) && 'text-primary'}`}
                 >
                     {letter}
                 </button>

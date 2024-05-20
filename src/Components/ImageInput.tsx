@@ -27,7 +27,7 @@ export function ImageInput({prompt, images, nextPage, setHangman, addGuess}: Ima
 
     return (
         <div className="max-w-[816px] flex flex-col gap-10 mx-auto items-center">
-            <div className="w-3/4">
+            <div className="w-3/4 max-w-[550px]">
                 <ImagesContainer imageUrls={images}></ImagesContainer>
             </div>
             <InputField name="guess" onChange={(e) => {

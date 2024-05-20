@@ -16,15 +16,10 @@ type HangmanProps = {
 export function Hangman({images, nextPage, prompt }: HangmanProps) {
     const [wordToGuess, setWordToGuess] = useState(prompt); // You can generate a random word here
     const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
-    const [incorrectGuesses, setIncorrectGuesses] = useState(0);
 
     // Function to handle letter guess
     const handleLetterGuess = (letter : string) => {
-        if (wordToGuess.includes(letter)) {
             setGuessedLetters([...guessedLetters, letter]);
-        } else {
-            setIncorrectGuesses(incorrectGuesses + 1);
-        }
     };
 
     // Function to generate the word with blanks and guessed letters
@@ -44,7 +39,7 @@ export function Hangman({images, nextPage, prompt }: HangmanProps) {
     console.log("prompt", prompt);
     return (
         <div className="max-w-[816px] flex flex-col mx-auto items-center">
-            <div className="w-3/4">
+            <div className="w-3/4  max-w-[550px]">
                 <ImagesContainer imageUrls={images}></ImagesContainer>
             </div>
             <div

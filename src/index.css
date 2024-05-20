@@ -12,17 +12,36 @@ p, h1, h2, div {
 }
 
 h1{
-  @apply text-h1 font-bold mb-4;
+  @apply text-[5rem] leading-[4.5rem] font-bold mb-4;
 }
 
 h2{
-  @apply text-h2 font-bold mb-4;
+  @apply text-[4rem] leading-[4rem] font-bold mb-4;
 }
 
 h3{
-  @apply text-h3 font-bold mb-4;
+  @apply text-[3rem] font-bold mb-4;
 }
 
-p {
-  @apply text-p leading-none font-light;
+p, .p {
+  @apply text-[1.5rem] leading-none font-light;
+}
+
+
+@screen lg {
+  h1{
+    @apply text-h1 leading-[7rem];
+  }
+
+  h2{
+    @apply text-h2 leading-[7rem];
+  }
+
+  h3{
+    @apply text-h3;
+  }
+
+  p, .p {
+    @apply text-p;
+  }
 }
