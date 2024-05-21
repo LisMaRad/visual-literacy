@@ -67,6 +67,10 @@ const UserInput: React.FC<UserInputProps> = () => {
 
     }
 
+    const refactorImageUrls = (imageUrls: string[]) : string[] => {
+        return imageUrls.map((url) => url.split("/").pop() || "");
+    }
+
     const safeImage = async () => {
         setIsLoading(true);
         const currentIndex = await getCountFromFireStore();
@@ -76,10 +80,11 @@ const UserInput: React.FC<UserInputProps> = () => {
         try {
             const docRef = collection(firestore, "pictures");
 
+            const refactoredImageUrls : string[] = refactorImageUrls(imageUrls);
             // Save the imageUrls and prompt to Firestore
             await addDoc(docRef, {
                 index: totalEntries,
-                imageUrls: imageUrls,
+                imageUrls: refactoredImageUrls,
                 prompt: inputValue
             });
 

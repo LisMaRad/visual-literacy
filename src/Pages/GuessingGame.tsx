@@ -71,6 +71,8 @@ const GuessingGame: React.FC = () => {
                 const docQuery = query(collection(firestore, 'pictures'), where("index", "==", index));
                 const querySnapshot = await getDocs(docQuery);
 
+                console.log("snapshot",querySnapshot);
+
                 for (const doc of querySnapshot.docs) {
                     if (doc.exists()) {
                         const docData = doc.data();
@@ -78,12 +80,12 @@ const GuessingGame: React.FC = () => {
 
                         for (const imageName of docData.imageUrls) {
                             const imageUrl = ref(storage, imageName);
+                            console.log("imageUrl", imageUrl);
                             try {
                                 const url = await getDownloadURL(imageUrl);
                                 imageUrlArray.push(url);
                             } catch (error) {
                                 console.error(`Error fetching image URL for ${imageName}:`, error);
-                                continue; // Skip this image and continue with the next one
                             }
                         }
 
