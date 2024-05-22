@@ -122,7 +122,7 @@ const UserInput: React.FC<UserInputProps> = () => {
             <div className="fixed top-4 right-4">
                 <Button onClick={() => navigate("/")}>Home</Button>
             </div>
-            <h3 className="max-w-[60%] leading-none h-[180px]">Create a new Prompt
+            <h3 className="w-[1200px] leading-none h-[180px]">Create a new Prompt
                 with Stable Diffusion</h3>
             {index === 0 && (<><p className="w-[1500px]">
                 Your examples should emphasize the lack of diversity of any kind while using Stable Diffusion.<br/>
@@ -152,7 +152,10 @@ const UserInput: React.FC<UserInputProps> = () => {
                             <Button onClick={() => navigate("/completion")}>Continue</Button>
                         </div>
                     </div>
-                </> : <p>Loading... </p>)}
+                </> : <div className="w-full h-full top-0 left-0">
+                    <p className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">Loading ...</p>
+                </div>
+                )}
 
         </>
     );

@@ -16,7 +16,6 @@ export interface AiPrompts {
 
 const GuessingGame: React.FC = () => {
     const [data, setData] = React.useState<AiPrompts[]>([]);
-    //TODO: change index back to 0
     const [index, setIndex] = React.useState<number>(0);
     const [hint, setHint] = React.useState<boolean>(false);
     const [isLoading, setIsLoading] = React.useState<boolean>(true);
@@ -118,7 +117,9 @@ const GuessingGame: React.FC = () => {
 
     return (
         <>
-            {isLoading ? (<div className="w-full h-full text-center top-1/2 translate-y-1/2">Loading ...</div>) : ( // Render Loading component if isLoading is true
+            {isLoading ? (<div className="w-[100vw] h-[100vh] relative">
+                <p className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">Loading ...</p>
+            </div>) : ( // Render Loading component if isLoading is true
                 <>
                     <div className="fixed top-4 right-4">
                         <Button onClick={() => navigate("/")}>Home</Button>
