@@ -122,7 +122,7 @@ const UserInput: React.FC<UserInputProps> = () => {
             <div className="fixed top-4 right-4">
                 <Button onClick={() => navigate("/")}>Home</Button>
             </div>
-            <h3 className="max-w-[60%] leading-none h-[300px]">Create a new Prompt
+            <h3 className="max-w-[60%] leading-none h-[180px]">Create a new Prompt
                 with Stable Diffusion</h3>
             {index === 0 && (<><p className="max-w-[1557px]">
                 Your examples should emphasize the lack of diversity of any kind while using Stable Diffusion.<br/>
@@ -137,7 +137,7 @@ const UserInput: React.FC<UserInputProps> = () => {
             {index === 1 && (
                 !isLoading ? <>
                     <div className="max-w-[816px] flex flex-col gap-10 mx-auto items-center">
-                        <div className="w-3/4">
+                        <div className="w-3/4 max-w-[550px]">
                             {imageUrls.length > 0 ? <ImagesContainer imageUrls={imageUrls}/> :
                                 <div className="w-full aspect-square border-solid border-2 border-white"></div>}
                         </div>
@@ -148,7 +148,7 @@ const UserInput: React.FC<UserInputProps> = () => {
                             <Button onClick={() => fetchImages()}>Generate image</Button>}
                         <div className="fixed bottom-4 right-4 flex flex-col gap-3 lg:gap-7">
                             {imageUrls.length > 0 && inputValue !== "" && <Button onClick={safeImage}>Submit</Button>}
-                            <Button onClick={() => setIndex(5)}>Back</Button>
+                            <Button onClick={() => setIndex(index - 1)}>Back</Button>
                             <Button onClick={() => navigate("/completion")}>Continue</Button>
                         </div>
                     </div>

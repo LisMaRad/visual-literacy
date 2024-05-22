@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {Button} from "../Components/Button";
-import {collection, getDoc, query, limit, doc, getDocs, where} from "firebase/firestore";
+import {collection, query, limit, getDocs, where} from "firebase/firestore";
 import {firestore, storage} from "../firebaseConfig";
 import {ref, getDownloadURL} from "firebase/storage";
 import {ImageInput} from "../Components/ImageInput";
@@ -162,7 +162,7 @@ const GuessingGame: React.FC = () => {
                         <>
                             <h3 className="max-w-[60%] leading-none h-[300px]">What had these
                                 Examples in Common?</h3>
-                            <div className="flex flex-col lg:flex-row items-start justify-evenly gap-12">
+                            <div className="flex flex-col lg:flex-row items-start justify-center gap-20">
                                 {data.map((item, index) => (
                                     <ImagesAndGuessesOverview key={index} item={item}/>
                                 ))}
