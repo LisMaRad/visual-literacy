@@ -117,7 +117,7 @@ const GuessingGame: React.FC = () => {
 
     return (
         <>
-            {isLoading ? (<div className="w-[100vw] h-[100vh] relative">
+            {isLoading ? (<div className="w-full h-full top-0 left-0">
                 <p className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">Loading ...</p>
             </div>) : ( // Render Loading component if isLoading is true
                 <>
