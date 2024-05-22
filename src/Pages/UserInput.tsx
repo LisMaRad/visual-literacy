@@ -37,8 +37,8 @@ const UserInput: React.FC<UserInputProps> = () => {
             "model_id": "lob-realvisxl-v20",
             "prompt": inputValue,
             "negative_prompt": "painting, extra fingers, mutated hands, poorly drawn hands, poorly drawn face, deformed, blurry, bad anatomy, bad proportions, extra limbs, cloned face, glitchy, double torso, extra arms, extra hands, mangled fingers, missing lips,  distorted face, extra legs, anime, super heroes, costumes, phantasy",
-            "width": "512",
-            "height": "512",
+            "width": "280",
+            "height": "280",
             "samples": "4",
             "num_inference_steps": "30",
             "seed": null,
@@ -67,7 +67,7 @@ const UserInput: React.FC<UserInputProps> = () => {
 
     }
 
-    const refactorImageUrls = (imageUrls: string[]) : string[] => {
+    const refactorImageUrls = (imageUrls: string[]): string[] => {
         return imageUrls.map((url) => url.split("/").pop() || "");
     }
 
@@ -80,7 +80,7 @@ const UserInput: React.FC<UserInputProps> = () => {
         try {
             const docRef = collection(firestore, "pictures");
 
-            const refactoredImageUrls : string[] = refactorImageUrls(imageUrls);
+            const refactoredImageUrls: string[] = refactorImageUrls(imageUrls);
             // Save the imageUrls and prompt to Firestore
             await addDoc(docRef, {
                 index: totalEntries,
@@ -124,7 +124,7 @@ const UserInput: React.FC<UserInputProps> = () => {
             </div>
             <h3 className="max-w-[60%] leading-none h-[180px]">Create a new Prompt
                 with Stable Diffusion</h3>
-            {index === 0 && (<><p className="max-w-[1557px]">
+            {index === 0 && (<><p className="w-[1500px]">
                 Your examples should emphasize the lack of diversity of any kind while using Stable Diffusion.<br/>
                 Think about stereo types and issues within our society.<br/>
                 If you have found such an example <span className="inline-block"><Button onClick={() => {
