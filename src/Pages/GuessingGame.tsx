@@ -118,7 +118,7 @@ const GuessingGame: React.FC = () => {
 
     return (
         <>
-            {isLoading ? (<div>Laden</div>) : ( // Render Loading component if isLoading is true
+            {isLoading ? (<div className="w-full h-full text-center top-1/2 translate-y-1/2">Loading ...</div>) : ( // Render Loading component if isLoading is true
                 <>
                     <div className="fixed top-4 right-4">
                         <Button onClick={() => navigate("/")}>Home</Button>
