@@ -53,17 +53,31 @@ const UserInput: React.FC<UserInputProps> = () => {
             body: raw,
             redirect: 'follow'
         };
+        console.log("requestOptions", requestOptions);
 
-        fetch("https://modelslab.com/api/v6/images/text2img", requestOptions)
-            .then(response => response.text())
-            .then(result => {
-                setImageUrls(JSON.parse(result).output);
-                setIsLoading(false);
-            })
-            .catch(error => {
-                console.log('error', error);
-                setIsLoading(false);
-            });
+        function fetchImageUrls() {
+            fetch("https://modelslab.com/api/v6/images/text2img", requestOptions)
+                .then(response => response.text())
+                .then(result => {
+                    const imageArray = JSON.parse(result).output;
+                    console.log("imageArray", imageArray);
+                    if (imageArray.length === 0) {
+                        console.log("No images found, retrying...");
+                        fetchImageUrls(); // Recursively call the function again
+                    } else {
+                        setImageUrls(imageArray);
+                        console.log("imageArray", imageArray);
+                        setIsLoading(false);
+                    }
+                })
+                .catch(error => {
+                    console.log('error', error);
+                    setIsLoading(false);
+                });
+        }
+
+// Start the process
+        fetchImageUrls();
 
     }
 
@@ -153,7 +167,7 @@ const UserInput: React.FC<UserInputProps> = () => {
                         </div>
                     </div>
                 </> : <div className="w-full h-full top-0 left-0">
-                    <p className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">Loading ...</p>
+                    <p className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">Generating images ...</p>
                 </div>
                 )}
 
