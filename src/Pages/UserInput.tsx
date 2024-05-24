@@ -150,7 +150,7 @@ const UserInput: React.FC<UserInputProps> = () => {
             </>)}
             {index === 1 && (
                 !isLoading ? <>
-                    <div className="max-w-[816px] flex flex-col gap-10 mx-auto items-center">
+                    <div className="w-[990px] flex flex-col gap-10 mx-auto items-center">
                         <div className="w-3/4 max-w-[550px]">
                             {imageUrls.length > 0 ? <ImagesContainer imageUrls={imageUrls}/> :
                                 <div className="w-full aspect-square border-solid border-2 border-white"></div>}
