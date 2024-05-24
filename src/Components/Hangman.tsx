@@ -43,10 +43,11 @@ export function Hangman({images, nextPage, prompt }: HangmanProps) {
             <div
                 className="text-white py-2 mt-7">
             <WordToGuess displayWord={generateDisplayWord()} />
+            </div>
             <AlphabetButtons
-                guessedLetters={guessedLetters}
-                onLetterClick={handleLetterGuess}
-            /></div>
+            guessedLetters={guessedLetters}
+            onLetterClick={handleLetterGuess}
+        />
             {isWinner() ? <div className="fixed bottom-4 right-4">
                 <Button onClick={() => {nextPage && nextPage()}}>Continue</Button>
             </div> : null}

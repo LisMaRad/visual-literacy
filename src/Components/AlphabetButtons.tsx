@@ -15,7 +15,7 @@ const AlphabetButtons = ({ guessedLetters, onLetterClick }: AlphabetButtonsProps
 
     // Render
     return (
-        <div className="flex justify-center w-[990px] flex-wrap mt-28 fixed">
+        <div className="flex justify-center w-[990px] flex-wrap mt-28 fixed bottom-0">
             {alphabet.map((letter) => (
                 <button
                     key={letter}
