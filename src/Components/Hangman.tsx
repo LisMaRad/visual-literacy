@@ -1,6 +1,4 @@
-import React, {useEffect, useState} from 'react';
-import {Link, useNavigate} from "react-router-dom";
-import {InputField} from "./InputField";
+import React, { useState} from 'react';
 import {ImagesContainer} from "./ImagesContainer";
 import {Button} from "./Button";
 import AlphabetButtons from "./AlphabetButtons";
@@ -38,7 +36,7 @@ export function Hangman({images, nextPage, prompt }: HangmanProps) {
     console.log("images", images);
     console.log("prompt", prompt);
     return (
-        <div className="max-w-[816px] flex flex-col mx-auto items-center">
+        <div className="max-w-[990px] flex flex-col mx-auto items-center">
             <div className="w-3/4  max-w-[550px]">
                 <ImagesContainer imageUrls={images}></ImagesContainer>
             </div>
@@ -56,4 +54,4 @@ export function Hangman({images, nextPage, prompt }: HangmanProps) {
     );
 
 
-};
+}

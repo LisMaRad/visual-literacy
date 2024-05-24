@@ -15,6 +15,7 @@ export function InputField ({ name, value, answer, placeholder, onChange }: Inpu
                value={value}
                onChange={onChange}
                placeholder={placeholder}
-               className={`w-full border-2 rounded-[100px] bg-primary text-white leading-none py-3 px-8 ${answer ? "border-green-500" : "border-white"}`} />
+               max={35}
+               className={`w-full border-2 rounded-[100px] bg-primary text-white leading-none py-2 px-8 ${answer ? "border-green-500" : "border-white"}`} />
     );
 }
