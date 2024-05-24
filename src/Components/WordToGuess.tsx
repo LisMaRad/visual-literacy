@@ -5,7 +5,7 @@ type WordToGuessProps = {
 };
 const WordToGuess = ({ displayWord } : WordToGuessProps) => {
     return (
-        <div className="text-center border-solid border-2 rounded-full py-4 px-10">
+        <div className="text-center border-solid w-full border-2 rounded-full py-4 px-10">
                 {displayWord.split('').map((char, index) => (
                     <span key={index} className={`uppercase text-[1.5rem] lg:text-p ${char === ' ' ? 'mr-5' : '-mr-2'}`}>
             {char}
